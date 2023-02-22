@@ -1,148 +1,75 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 
 function App(): JSX.Element {
-  const [squares, setSquares] = useState<Array<string | null>>(
-    Array<string | null>(9).fill(null)
-  );
-  const [xTurn, setXTurn] = useState<boolean>(true);
-  let status = "X's turn...";
-  const winner = calculateWinner(squares);
-  if (winner != null) {
-    status = 'Winner is: ' + winner;
-  } else {
-    status = 'Currently it is ' + (xTurn ? 'X' : '0') + "'s turn...";
-  }
-
-  function handleSquareClick(index: number): void {
-    if (squares[index] != null || calculateWinner(squares) != null) return;
-    const currentSquares: Array<string | null> = squares.slice();
-    let flag = 'X';
-    if (!xTurn) flag = 'O';
-    currentSquares[index] = flag;
-    setSquares(currentSquares);
-    setXTurn(!xTurn);
-  }
-
   return (
     <>
-      <div className="text-4xl">{status}</div>
-      <div className="flex flex-row">
-        <Square
-          label={squares[0]}
-          index={0}
-          onSquareClick={() => {
-            handleSquareClick(0);
-          }}
-        />
-        <Square
-          label={squares[1]}
-          index={1}
-          onSquareClick={() => {
-            handleSquareClick(1);
-          }}
-        />
-        <Square
-          label={squares[2]}
-          index={2}
-          onSquareClick={() => {
-            handleSquareClick(2);
-          }}
-        />
-      </div>
-      <div className="flex flex-row">
-        <Square
-          label={squares[3]}
-          index={3}
-          onSquareClick={() => {
-            handleSquareClick(3);
-          }}
-        />
-        <Square
-          label={squares[4]}
-          index={4}
-          onSquareClick={() => {
-            handleSquareClick(4);
-          }}
-        />
-        <Square
-          label={squares[5]}
-          index={5}
-          onSquareClick={() => {
-            handleSquareClick(5);
-          }}
-        />
-      </div>
-      <div className="flex flex-row">
-        <Square
-          label={squares[6]}
-          index={6}
-          onSquareClick={() => {
-            handleSquareClick(6);
-          }}
-        />
-        <Square
-          label={squares[7]}
-          index={7}
-          onSquareClick={() => {
-            handleSquareClick(7);
-          }}
-        />
-        <Square
-          label={squares[8]}
-          index={8}
-          onSquareClick={() => {
-            handleSquareClick(8);
-          }}
-        />
+      <div
+        id="appWrapper"
+        className="flex flex-col md:flex-row font-quicksand text-gray-600"
+      >
+        <div
+          id="signatureCreator"
+          className="flex flex-col md:h-screen md:w-1/4 bg-primary/90"
+        >
+          {/* Switch to UIHeadless tabs */}
+          <div
+            id="signatureCreatorMenu"
+            className="flex flex-row flex-wrap bg-dark-accent/90 p-2"
+          >
+            <div className=" bg-dark-shade/90 text-white/90 rounded-sm p-1 m-1 w-20 text-center hover:bg-dark-shade/70 focus:bg-dark-shade/70 cursor-pointer">
+              Details
+            </div>
+            <div className="bg-dark-shade/90 text-white/90 rounded-sm p-1 m-1 w-20 text-center hover:bg-dark-shade/70 focus:bg-dark-shade/70 cursor-pointer">
+              Button2
+            </div>
+            <div className="bg-dark-shade/90 text-white/90 rounded-sm p-1 m-1 w-20 text-center hover:bg-dark-shade/70 focus:bg-dark-shade/70 cursor-pointer">
+              Button3
+            </div>
+            <div className="bg-dark-shade/90 text-white/90 rounded-sm p-1 m-1 w-20 text-center hover:bg-dark-shade/70 focus:bg-dark-shade/70 cursor-pointer">
+              Button4
+            </div>
+          </div>
+          <div id="signatureCreatorSettings" className="px-3 py-4">
+            <div id="signatureDetails" className="flex flex-col">
+              <div className=" text-white/90 font-medium">
+                Signature Details
+              </div>
+              <div>
+                {/* Make draggable list: https://github.com/atlassian/react-beautiful-dnd */}
+                <input
+                  type="text"
+                  id="firstName"
+                  placeholder="First name"
+                  spellCheck="false"
+                  className="bg-light-shade/90 rounded-sm h-8 m-0.5"
+                />
+                <input
+                  type="text"
+                  id="lastName"
+                  placeholder="Last name"
+                  spellCheck="false"
+                  className="bg-light-shade/90 rounded-sm h-8 m-0.5"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          id="signaturePreview"
+          className="flex flex-col items-center md:h-screen md:w-3/4 bg-light-shade py-2 px-6"
+        >
+          <div className="font-quicksand text-center w-full font-medium">
+            Email Preview
+          </div>
+          <div className="h-3/4 w-3/4 rounded-md border border-dark-shade p-2">
+            <div className="">
+              <div>Insert preview component here</div>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
 }
-
-function Square({
-  index,
-  label,
-  onSquareClick: handleSquareClick
-}: SquareProps): JSX.Element {
-  return (
-    <button
-      className="text-2xl bg-slate-100/80 w-20 h-20 border"
-      onClick={handleSquareClick}
-    >
-      {label}
-    </button>
-  );
-}
-
-interface SquareProps {
-  label: string | null;
-  index: number;
-  onSquareClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-}
-
-function calculateWinner(squares: Array<string | null>): string | null {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-  ];
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
-    if (
-      Boolean(squares[a]) &&
-      squares[a] === squares[b] &&
-      squares[a] === squares[c]
-    ) {
-      return squares[a];
-    }
-  }
-  return null;
-}
-
 export default App;
