@@ -1,5 +1,7 @@
 import React from 'react';
 import './App.css';
+import EmailSigPreview from './EmailSigPreview';
+import EmailSigSettings from './EmailSigSettings';
 
 function App(): JSX.Element {
   return (
@@ -10,63 +12,15 @@ function App(): JSX.Element {
       >
         <div
           id="signatureCreationOptions"
-          className="flex flex-col md:h-screen md:w-1/3 bg-gradient-to-br from-blue-500/70 to-blue-400/70"
+          className="flex flex-col md:h-screen md:w-1/4 bg-gradient-to-br from-blue-500/70 to-blue-400/70"
         >
-          {/* Switch to UIHeadless tabs */}
-          <div
-            id="signatureCreatorOptionsMenu"
-            className="flex flex-row flex-wrap p-2 bg-gradient-to-br from-blue-700/40 to-blue-600/40"
-          >
-            <div className=" bg-dark-shade/90 text-white/90 rounded-sm p-1 m-1 w-20 text-center hover:bg-dark-shade/70 focus:bg-dark-shade/70 cursor-pointer">
-              Details
-            </div>
-            <div className="bg-dark-shade/90 text-white/90 rounded-sm p-1 m-1 w-20 text-center hover:bg-dark-shade/70 focus:bg-dark-shade/70 cursor-pointer">
-              Button2
-            </div>
-            <div className="bg-dark-shade/90 text-white/90 rounded-sm p-1 m-1 w-20 text-center hover:bg-dark-shade/70 focus:bg-dark-shade/70 cursor-pointer">
-              Button3
-            </div>
-            <div className="bg-dark-shade/90 text-white/90 rounded-sm p-1 m-1 w-20 text-center hover:bg-dark-shade/70 focus:bg-dark-shade/70 cursor-pointer">
-              Button4
-            </div>
-          </div>
-          <div id="signatureCreatorSettings" className="px-3 py-4">
-            <div id="signatureDetails" className="flex flex-col">
-              <div className=" text-white/90 font-medium">
-                Signature Details
-              </div>
-              <div>
-                {/* Make draggable list: https://github.com/atlassian/react-beautiful-dnd */}
-                <input
-                  type="text"
-                  id="firstName"
-                  placeholder="First name"
-                  spellCheck="false"
-                  className="bg-light-shade/90 border-dark-shade/60 rounded-sm h-8 w-44 m-0.5"
-                />
-                <input
-                  type="text"
-                  id="lastName"
-                  placeholder="Last name"
-                  spellCheck="false"
-                  className="bg-light-shade/90 border-dark-shade/60 rounded-sm h-8 w-44 m-0.5"
-                />
-              </div>
-            </div>
-          </div>
+          <EmailSigSettings />
         </div>
         <div
           id="signaturePreview"
-          className="flex flex-col items-center h-screen md:w-2/3 bg-gradient-to-br from-neutral-200 to-gray-100 py-2 px-6"
+          className="flex flex-col items-center h-screen md:w-3/4 bg-gradient-to-br from-neutral-200 to-gray-100 py-2 px-6"
         >
-          <div className="font-quicksand text-center w-full font-medium">
-            Email Preview
-          </div>
-          <div className="h-3/4 w-3/4 rounded-md border border-dark-shade/60 p-2">
-            <div className="">
-              <div>Insert preview component here</div>
-            </div>
-          </div>
+          <EmailSigPreview />
         </div>
       </div>
     </>
