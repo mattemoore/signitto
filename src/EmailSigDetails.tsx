@@ -18,6 +18,7 @@ interface SignatureDetailProps {
   id: string;
   index: number;
   value: string;
+  onChange: (detailID: string, value: string) => void;
 }
 
 interface SignatureDetail {
@@ -51,18 +52,31 @@ function SignatureDetailsList(): JSX.Element {
   const [signatureDetails, setSignatureDetails] =
     useState(initSignatureDetails);
 
-  console.log(signatureDetails);
-
-  const reorder = (
+  function reorder(
     list: SignatureDetail[],
     startIndex: number,
     endIndex: number
-  ): SignatureDetail[] => {
+  ): SignatureDetail[] {
     const result = Array.from(list);
     const [removed] = result.splice(startIndex, 1);
     result.splice(endIndex, 0, removed);
     return result;
-  };
+  }
+
+  function setDetailValue(detailID: string, value: string): void {
+    const oldList: SignatureDetail[] = signatureDetails.slice();
+    const detailToChange: SignatureDetail | undefined = oldList.find(
+      (detail) => {
+        return detail.id === detailID;
+      }
+    );
+    if (detailToChange !== undefined) {
+      detailToChange.value = value;
+    } else {
+      console.error(`detailID: ${detailID} not found in sig details list.`);
+    }
+    console.log(signatureDetails);
+  }
 
   function onDragEnd(result: DropResult): void {
     const { source, destination } = result;
@@ -104,6 +118,7 @@ function SignatureDetailsList(): JSX.Element {
                           label={detail.label}
                           value={detail.value}
                           key={detail.id}
+                          onChange={setDetailValue}
                         />
                       );
                     }
@@ -141,7 +156,10 @@ function SignatureDetailItem(props: SignatureDetailProps): JSX.Element {
               placeholder={props.label}
               spellCheck="false"
               className="bg-light-shade/90 border-dark-shade/60 border-b rounded-sm h-8 m-0.5"
-              value={props.value}
+              defaultValue={props.value}
+              onChange={(e) => {
+                props.onChange(props.id, e.currentTarget.value);
+              }}
             />
           </div>
         </div>

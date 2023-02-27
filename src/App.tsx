@@ -10,6 +10,7 @@ function App(): JSX.Element {
         id="appWrapper"
         className="flex flex-col md:flex-row font-quicksand text-gray-600"
       >
+        {/* Create EmailSignatureApp and lift state EmailSigSettings state up to it} */}
         <div
           id="signatureCreationOptions"
           className="flex flex-col md:h-screen md:w-1/4 bg-gradient-to-br from-blue-500/70 to-blue-400/70"
