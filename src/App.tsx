@@ -1,13 +1,12 @@
 import React from 'react';
 import './App.css';
-import { store } from './Stores/Store';
-import { Provider } from 'react-redux';
+import { RecoilRoot } from 'recoil';
 import SignaturePreview from './Components/SignaturePreview';
 import SignatureSettings from './Components/SignatureSettings';
 
 function App(): JSX.Element {
   return (
-    <Provider store={store}>
+    <RecoilRoot>
       <>
         <div
           id="appWrapper"
@@ -28,7 +27,7 @@ function App(): JSX.Element {
           </div>
         </div>
       </>
-    </Provider>
+    </RecoilRoot>
   );
 }
 export default App;
