@@ -1,35 +1,63 @@
 import React from 'react';
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
-import { RxFileText } from 'react-icons/rx/';
+import {
+  HiOutlineShare,
+  HiOutlineTemplate,
+  HiOutlineNewspaper,
+  HiOutlineViewList
+} from 'react-icons/hi';
 
 function SignatureSettingsMenuBar(): JSX.Element {
   return (
     <ToggleGroup.Root
-      className="ToggleGroup"
+      className="inline-flex flex-wrap justify-center"
       type="single"
-      defaultValue="center"
-      aria-label="Text alignment"
+      defaultValue="details"
+      aria-label="Signature Settings Menu"
     >
       <ToggleGroup.Item
-        className="ToggleGroupItem"
-        value="left"
-        aria-label="Left aligned"
+        className="hover:border-b-2 hover:border-b-black data-[state=on]:border-b-black data-[state=on]:border-b-2 mx-5 px-5"
+        value="details"
+        aria-label="Details"
       >
-        <RxFileText className="text-red-800" title="File Details Icon" />
+        Details
+        <HiOutlineViewList
+          className="text-gray-700-800 float-left h-6 w-6 mr-1"
+          title="Design Settings Icon"
+        />
       </ToggleGroup.Item>
       <ToggleGroup.Item
-        className="ToggleGroupItem"
-        value="center"
-        aria-label="Center aligned"
+        className="hover:border-b-2 hover:border-b-black data-[state=on]:border-b-black data-[state=on]:border-b-2 mx-5 px-5"
+        value="social"
+        aria-label="Social Settings"
       >
-        <RxFileText size="6em" />
+        Social
+        <HiOutlineShare
+          className="text-gray-700-800 float-left h-6 w-6 mr-1"
+          title="Social Settings Icon"
+        />
       </ToggleGroup.Item>
       <ToggleGroup.Item
-        className="ToggleGroupItem"
-        value="right"
-        aria-label="Right aligned"
+        className="hover:border-b-2 hover:border-b-black data-[state=on]:border-b-black data-[state=on]:border-b-2 mx-5 px-5"
+        value="template"
+        aria-label="Template Settings"
       >
-        <RxFileText />
+        Template
+        <HiOutlineTemplate
+          className="text-gray-700-800 float-left h-6 w-6 mr-1"
+          title="Template Settings Icon"
+        />
+      </ToggleGroup.Item>
+      <ToggleGroup.Item
+        className="hover:border-b-2 hover:border-b-black data-[state=on]:border-b-black data-[state=on]:border-b-2 mx-5 px-5"
+        value="design"
+        aria-label="Design Settings"
+      >
+        Design
+        <HiOutlineNewspaper
+          className="text-gray-700-800 float-left h-6 w-6 mr-1"
+          title="Design Settings Icon"
+        />
       </ToggleGroup.Item>
     </ToggleGroup.Root>
   );

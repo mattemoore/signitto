@@ -1,18 +1,19 @@
 import React from 'react';
 import SignatureDetailsListItem from './SignatureDetailListItem';
 import { type SignatureDetailModel } from '../models/SignatureDetailModel';
-
+import SignatureLogoDetail from './SignatureLogoDetail';
 import { DragDropContext, type DropResult } from 'react-beautiful-dnd';
 import { StrictModeDroppable } from './StrictModeDroppable';
 import { useRecoilState } from 'recoil';
 import { signatureDetailsState } from '../state/SignatureDetailsState';
+import * as Separator from '@radix-ui/react-separator';
+import { HiOutlineHand } from 'react-icons/hi';
 
 function SignatureDetailsList(): JSX.Element {
   const [signatureDetails, setSignatureDetails] = useRecoilState(
     signatureDetailsState
   );
 
-  // TODO: Clean this up
   function setDetailValue(detailID: string, value: string): void {
     const currentList: SignatureDetailModel[] = signatureDetails.slice();
     const detailToChange: number | undefined = currentList.findIndex(
@@ -21,9 +22,9 @@ function SignatureDetailsList(): JSX.Element {
       }
     );
     if (currentList[detailToChange] !== undefined) {
-      const clone: SignatureDetailModel = { ...currentList[detailToChange] };
-      clone.value = value;
-      currentList[detailToChange] = clone;
+      const detail: SignatureDetailModel = { ...currentList[detailToChange] };
+      detail.value = value;
+      currentList[detailToChange] = detail;
       setSignatureDetails(currentList);
     } else {
       console.error(`detailID: ${detailID} not found in sig details list.`);
@@ -57,43 +58,55 @@ function SignatureDetailsList(): JSX.Element {
       source.index,
       destination.index
     );
-
-    // TODO: Redux thunk thing here
     setSignatureDetails(reorderedDetails);
   }
 
   return (
     <>
-      <div id="signatureDetailsList" className="flex flex-col rounded-md">
-        <div className=" text-white/90 font-medium">Signature Details</div>
-        <DragDropContext onDragEnd={onDragEnd}>
-          <StrictModeDroppable droppableId="list">
-            {(droppableProvided) => (
-              <>
-                <div
-                  ref={droppableProvided.innerRef}
-                  {...droppableProvided.droppableProps}
-                >
-                  {signatureDetails.map(
-                    (detail: SignatureDetailModel, index: number) => {
-                      return (
-                        <SignatureDetailsListItem
-                          id={detail.id}
-                          index={index}
-                          label={detail.label}
-                          value={detail.value}
-                          key={detail.id}
-                          onChange={setDetailValue}
-                        />
-                      );
-                    }
-                  )}
-                </div>
-                {droppableProvided.placeholder}
-              </>
-            )}
-          </StrictModeDroppable>
-        </DragDropContext>
+      <div id="signatureDetailsList" className="flex flex-col px-4">
+        <div className="flow-root text-gray-700 font-medium p-4">
+          <div className="float-left pt-0.5">Signature Details</div>
+          <div className="float-right">
+            <button className="font-normal text-sm rounded-md border border-gray/10 px-2 hover:scale-110 hover:bg-slate-100">
+              <HiOutlineHand size="1.5em" className="float-left pr-1" /> I need
+              help!
+            </button>
+          </div>
+        </div>
+        <Separator.Root className="bg-slate-200/80 h-px my-2 text-center" />
+        <div id="detailsListContainer" className="py-2">
+          <div id="avatarContainer" className="flex flex-row">
+            <SignatureLogoDetail />
+          </div>
+          <DragDropContext onDragEnd={onDragEnd}>
+            <StrictModeDroppable droppableId="list">
+              {(droppableProvided) => (
+                <>
+                  <div
+                    ref={droppableProvided.innerRef}
+                    {...droppableProvided.droppableProps}
+                  >
+                    {signatureDetails.map(
+                      (detail: SignatureDetailModel, index: number) => {
+                        return (
+                          <SignatureDetailsListItem
+                            id={detail.id}
+                            index={index}
+                            label={detail.label}
+                            value={detail.value}
+                            key={detail.id}
+                            onChange={setDetailValue}
+                          />
+                        );
+                      }
+                    )}
+                  </div>
+                  {droppableProvided.placeholder}
+                </>
+              )}
+            </StrictModeDroppable>
+          </DragDropContext>
+        </div>
       </div>
     </>
   );
