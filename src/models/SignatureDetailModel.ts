@@ -15,7 +15,7 @@ export enum SignatureDetailType {
 export function CreateInitialSignatureDetails(): SignatureDetailModel[] {
   return [
     {
-      label: 'Name',
+      label: 'Full name',
       id: 'name',
       value: '',
       type: SignatureDetailType.Text
@@ -39,12 +39,6 @@ export function CreateInitialSignatureDetails(): SignatureDetailModel[] {
       type: SignatureDetailType.Text
     },
     {
-      label: 'Mobile',
-      id: 'mobile',
-      value: '',
-      type: SignatureDetailType.Text
-    },
-    {
       label: 'Website',
       id: 'website',
       value: '',
@@ -55,12 +49,6 @@ export function CreateInitialSignatureDetails(): SignatureDetailModel[] {
       id: 'email',
       value: '',
       type: SignatureDetailType.Email
-    },
-    {
-      label: 'Address',
-      id: 'address',
-      value: '',
-      type: SignatureDetailType.Text
     }
   ];
 }

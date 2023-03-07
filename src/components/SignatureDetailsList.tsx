@@ -64,10 +64,10 @@ function SignatureDetailsList(): JSX.Element {
   return (
     <>
       <div id="signatureDetailsList" className="flex flex-col px-4">
-        <div className="flow-root text-gray-700 font-medium p-4">
-          <div className="float-left pt-0.5">Signature Details</div>
+        <div className="flow-root text-gray-700 font-medium py-2">
+          <div className="float-left text-lg pt-0.5">Signature Details</div>
           <div className="float-right">
-            <button className="font-normal text-sm rounded-md border border-gray/10 px-2 hover:scale-110 hover:bg-slate-100">
+            <button className="h-8 font-normal text-sm rounded-md border border-gray/10 px-2 hover:scale-110 hover:bg-slate-100">
               <HiOutlineHand size="1.5em" className="float-left pr-1" /> I need
               help!
             </button>

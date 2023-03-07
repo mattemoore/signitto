@@ -7,11 +7,21 @@ import { HiPlus } from 'react-icons/hi';
 
 function SignatureLogo(): JSX.Element {
   const [images, setImages] = useRecoilState(signatureImageState);
+
+  // TODO: Remove dupe deep cloning code
   function onClickLogo(): void {
     const currentImages = images.slice();
     const image: SignatureImageModel = { ...currentImages[0] };
     image.url =
       'https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=128&h=128&dpr=2&q=80';
+    currentImages[0] = image;
+    setImages(currentImages);
+  }
+
+  function onClickRemove(): void {
+    const currentImages = images.slice();
+    const image: SignatureImageModel = { ...currentImages[0] };
+    image.url = '';
     currentImages[0] = image;
     setImages(currentImages);
   }
@@ -33,11 +43,14 @@ function SignatureLogo(): JSX.Element {
       <div id="avatarButtonContainer" className="flow-root h-24 pl-4 pt-4">
         <button
           onClick={onClickLogo}
-          className="font-normal text-sm rounded-md border border-gray/10 px-2 hover:scale-110 hover:bg-slate-100"
+          className="h-8 font-normal text-sm rounded-md border border-gray/10 px-2 hover:scale-110 hover:bg-slate-100"
         >
           <HiPlus size="1.5em" className="float-left pr-1" /> Logo / Photo
         </button>
-        <button className="float-right font-normal text-sm px-2 pt-1 text-red-700 hover:font-semibold">
+        <button
+          onClick={onClickRemove}
+          className="float-right font-normal text-sm pl-4 pt-1.5 text-red-700 hover:font-semibold"
+        >
           Remove
         </button>
         <div className="text-xs pt-1">PNG or JPG (max. 800x400px)</div>

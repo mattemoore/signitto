@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Signitto",
+  "name": "Signitto - Email Signature Creator",
   "icons": [
     {
       "src": "favicon.ico",
