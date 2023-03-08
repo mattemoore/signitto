@@ -17,37 +17,37 @@ export function CreateInitialSignatureDetails(): SignatureDetailModel[] {
     {
       label: 'Full name',
       id: 'name',
-      value: '',
+      value: 'Matthew Moore',
       type: SignatureDetailType.Text
     },
     {
       label: 'Title',
       id: 'title',
-      value: '',
+      value: 'The Godfather',
       type: SignatureDetailType.Text
     },
     {
       label: 'Company',
       id: 'company',
-      value: '',
+      value: 'Juksoft Inc.',
       type: SignatureDetailType.Text
     },
     {
       label: 'Phone',
       id: 'phone',
-      value: '',
-      type: SignatureDetailType.Text
+      value: '613-261-7212',
+      type: SignatureDetailType.Phone
     },
     {
       label: 'Website',
       id: 'website',
-      value: '',
+      value: 'http://www.google.com',
       type: SignatureDetailType.URL
     },
     {
       label: 'Email',
       id: 'email',
-      value: '',
+      value: 'matt.e.moore@gmail.com',
       type: SignatureDetailType.Email
     }
   ];

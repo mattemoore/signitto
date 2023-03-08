@@ -48,7 +48,7 @@ function SignatureDetailListItem(props: SignatureDetailProps): JSX.Element {
                   id={props.id}
                   spellCheck="false"
                   className="h-8 pl-8 w-full border-0"
-                  defaultValue={props.value}
+                  value={props.value}
                   onChange={(e) => {
                     props.onChange(props.id, e.currentTarget.value);
                   }}
