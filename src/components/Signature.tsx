@@ -9,6 +9,7 @@ import {
 } from '../models/SignatureDetailModel';
 import * as Avatar from '@radix-ui/react-avatar';
 import * as Separator from '@radix-ui/react-separator';
+import { HiOutlinePhone, HiOutlineMail, HiLink } from 'react-icons/hi';
 import classNames from 'classnames';
 
 function Signature(): JSX.Element {
@@ -52,20 +53,27 @@ function Signature(): JSX.Element {
                 {index === 3 && (
                   <Separator.Root className="bg-yellow-500/80 h-px my-2 text-center" />
                 )}
-                {/* TODO: Add icons for phone email and url */}
+
                 <div key={detail.id}>
-                  <div
-                    className={classNames({
-                      'text-xs': true,
-                      'font-bold':
-                        detail.id === 'name' ||
-                        detail.type === SignatureDetailType.Phone ||
-                        detail.type === SignatureDetailType.Email ||
-                        detail.type === SignatureDetailType.URL,
-                      'text-lg': detail.id === 'name'
-                    })}
-                  >
-                    {detail.value}
+                  <div className="flex flex-row">
+                    {detail.type === SignatureDetailType.Phone && (
+                      <HiOutlinePhone className="mr-2" />
+                    )}
+                    {detail.type === SignatureDetailType.Email && (
+                      <HiOutlineMail className="mr-2" />
+                    )}
+                    {detail.type === SignatureDetailType.URL && (
+                      <HiLink className="mr-2" />
+                    )}
+                    <div
+                      className={classNames({
+                        'font-bold': index === 0,
+                        'text-normal': index < 3,
+                        'text-xs': index >= 3
+                      })}
+                    >
+                      {detail.value}
+                    </div>
                   </div>
                 </div>
               </div>
